@@ -9,16 +9,14 @@
 int myPins[] = { 13, 12, 11, 10, 9 };
 int lastPin = 0;
 
-int LEDCOUNT = sizeof(myPins)/ sizeof(int);
-int DELAYSPEED = 500;
+const int LEDCOUNT = sizeof(myPins) / sizeof(int);
+const int DELAYSPEED = 500;
 
 void setup() {
-  
   //Initialize each socket in the array
   for(int i = 0; i < LEDCOUNT; i++){
     pinMode(myPins[i], OUTPUT);
   }
-  
 }
 
 void loop() {
@@ -27,14 +25,17 @@ void loop() {
   SingleBulbs();
   FlowPattern();
   AllOn();
-  
+
+  AllOff();
+  delay(DELAYSPEED);
 }
 
 /* Function that lights up one LED at a time */
 void SingleBulbs(){
-  
+
   AllOff();
-  
+
+  //Loop through our bulbs.  Turn off the last one then turn on the current one.
   for(int i = 0; i < LEDCOUNT; i++){
 
     if(lastPin > 0)
@@ -48,14 +49,16 @@ void SingleBulbs(){
 
 /* Function that lights up the LEDs on at a time with a faster shut off pattern */
 void FlowPattern(){
-  
+
   AllOff();
   
+  //Turn each bulb on one at a time.
   for(int i = 0; i < LEDCOUNT; i++){
     digitalWrite(myPins[i], HIGH);
     delay(DELAYSPEED);
   }
 
+  //Turn each bulb off one at a time but with increased speed.
   for(int i = 0; i < LEDCOUNT; i++){
     digitalWrite(myPins[i], LOW);
     delay(DELAYSPEED / 2);
