@@ -7,7 +7,6 @@
 */
 
 int myPins[] = { 13, 12, 11, 10, 9 };
-int lastPin = 0;
 
 const int LEDCOUNT = sizeof(myPins) / sizeof(int);
 const int DELAYSPEED = 500;
@@ -34,6 +33,8 @@ void loop() {
 void SingleBulbs(){
 
   AllOff();
+  
+  int lastPin = 0;
 
   //Loop through our bulbs.  Turn off the last one then turn on the current one.
   for(int i = 0; i < LEDCOUNT; i++){
